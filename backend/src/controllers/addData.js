@@ -14,6 +14,7 @@ exports.addItem = async (req,res) =>{
 
         console.log("Successfully meal added!")
 
+        res.json({status:"Success", item:newItem })
 
 
     } catch(error){

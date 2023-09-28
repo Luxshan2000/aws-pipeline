@@ -8,9 +8,10 @@ function AddItems({setItems}) {
   const handleSubmit = async (ev) => {
     ev.preventDefault();
   
-    try {
-      await axios.post("http://51.20.93.112:5000/api/add/item", { name: name });
+    try {//51.20.93.112
+      const response = await axios.post("http://localhost:5000/api/add/item", { name: name });
       setname("");
+      setItems((prv)=>[...prv,response.data.item])
     } catch (error) {
       // Handle errors, e.g., show an error message to the user
       console.error("Error:", error);
