@@ -3,7 +3,7 @@ const router = express.Router();
 const addData = require('../controllers/addData');
 
 
-router.get('/items', addData.addItem)
+router.post('/item', addData.addItem)
 
 
 module.exports = router;

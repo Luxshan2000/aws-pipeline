@@ -5,6 +5,7 @@ const Item = require('../modals/Item')
 exports.addItem = async (req,res) =>{
     try{
 
+        console.log(req.body)
         const { name } =  req.body
 
         const newItem = new Item({ name})
