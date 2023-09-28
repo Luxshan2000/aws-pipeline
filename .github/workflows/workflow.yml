@@ -38,7 +38,7 @@ jobs:
       - name: Run docker container
         run: docker run -d -p 3000:3000 --name aws-pipeline-frontend-container luxshan/aws-pipeline-frontend
 
-        name: Pull image from docker hub
+      - name: Pull image from docker hub
         run: docker pull luxshan/aws-pipeline-backend
       - name: Delete old container
         run: docker rm -f aws-pipeline-backend-container
