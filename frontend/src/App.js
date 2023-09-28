@@ -1,23 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import AddItems from './components/AddItems';
+import SeeItems from './components/SeeItems';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>This is an Demo Project for CICD Pipeline</h1>
+      <p>By using Github actions and docker in AWS EC2 instance Ubuntu</p>
+      <hr/>
+      <hr/>
+      <SeeItems />
+      <AddItems />
     </div>
   );
 }
