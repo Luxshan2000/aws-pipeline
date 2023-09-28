@@ -1,12 +1,13 @@
-name: CICD Frontend
+name: CICD Frontend and Backend
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
-  build:
-    runs-on: [ubuntu-latest]
+  build-frontend:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -15,32 +16,39 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build docker frontend image
+      - name: Build Docker frontend image
         run: docker build -t luxshan/aws-pipeline-frontend ./frontend
-      - name: Publish frontend image to docker hub
+      - name: Publish frontend image to Docker Hub
         run: docker push luxshan/aws-pipeline-frontend
 
-      - name: Build docker backend image
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build Docker backend image
         run: docker build -t luxshan/aws-pipeline-backend ./backend
-      - name: Publish backend image to docker hub
+      - name: Publish backend image to Docker Hub
         run: docker push luxshan/aws-pipeline-backend
 
-        
-        
   deploy:
-    needs: build
-    runs-on: [aws-ec2]
+    needs: [build-frontend, build-backend]
+    runs-on: aws-ec2
     steps:
-      - name: Pull image from docker hub
+      - name: Pull frontend image from Docker Hub
         run: docker pull luxshan/aws-pipeline-frontend
-      - name: Delete old container
-        run: docker rm -f aws-pipeline-frontend-container
-      - name: Run docker container
-        run: docker run -d -p 3000:3000 --name aws-pipeline-frontend-container luxshan/aws-pipeline-frontend
-
-      - name: Pull image from docker hub
+      - name: Pull backend image from Docker Hub
         run: docker pull luxshan/aws-pipeline-backend
-      - name: Delete old container
+      - name: Delete old frontend container
+        run: docker rm -f aws-pipeline-frontend-container
+      - name: Delete old backend container
         run: docker rm -f aws-pipeline-backend-container
-      - name: Run docker container
+      - name: Run frontend container
+        run: docker run -d -p 3000:3000 --name aws-pipeline-frontend-container luxshan/aws-pipeline-frontend
+      - name: Run backend container
         run: docker run -d -p 5000:5000 --name aws-pipeline-backend-container luxshan/aws-pipeline-backend
