@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 
-const dummy = ["Apple", "Orange", "Car"]
 
 
-function SeeItems() {
-    const [items, setItems] = useState([])
 
-    useEffect(()=>{
-        setItems(dummy)
-    })
+function SeeItems({items}) {
+
+  
+    
 
     if(!items){
         return <h1>Loading.....</h1>
@@ -17,7 +15,7 @@ function SeeItems() {
   return (
     <div>
         {items.map((item)=>(
-                <h6>{item}</h6>
+                <h6 key={item._id}>{item.name}</h6>
         ))}
     </div>
   )
