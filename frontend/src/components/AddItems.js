@@ -8,7 +8,7 @@ function AddItems({setItems}) {
   const handleSubmit = async  (ev)=>{
     
      ev.preventDefault()
-     await axios.post("http://localhost:5000/api/add/item",{name: name } )
+     await axios.post("http://51.20.93.112:5000/api/add/item",{name: name } )
     
      setname("")
   }

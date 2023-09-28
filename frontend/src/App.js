@@ -8,7 +8,7 @@ function App() {
   const [items, setItems] = useState([])
 
   useEffect(()=>{
-      axios.get("http://localhost:5000/api/get/items").then(response => {
+      axios.get("http://51.20.93.112:5000/api/get/items").then(response => {
       
       setItems(response.data)
     })
