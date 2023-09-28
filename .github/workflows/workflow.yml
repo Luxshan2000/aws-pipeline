@@ -27,7 +27,7 @@ jobs:
     runs-on: [aws-ec2]
     steps:
       - name: Pull image from docker hub
-        run: docker pull luxshan/aws-pipeline:latest
+        run: docker pull luxshan/aws-pipeline
       - name: Delete old container
         run: docker rm -f aws-pipeline-frontend-container
       - name: Run docker container
