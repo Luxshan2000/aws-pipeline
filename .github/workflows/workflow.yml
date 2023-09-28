@@ -16,9 +16,9 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
-        run: docker build -t luxshan/aws-pipeline/frontend ./frontend
+        run: docker build -t luxshan/aws-pipeline ./frontend
       - name: Publish image to docker hub
-        run: docker push luxshan/aws-pipeline/frontend
+        run: docker push luxshan/aws-pipeline
 
         
         
@@ -27,8 +27,8 @@ jobs:
     runs-on: [aws-ec2]
     steps:
       - name: Pull image from docker hub
-        run: docker pull luxshan/aws-pipeline/frontend:latest
+        run: docker pull luxshan/aws-pipeline:latest
       - name: Delete old container
         run: docker rm -f aws-pipeline-frontend-container
       - name: Run docker container
-        run: docker run -d -p 3000:3000 --name aws-pipeline-frontend-container luxshan/aws-pipeline/frontend
+        run: docker run -d -p 3000:3000 --name aws-pipeline-frontend-container luxshan/aws-pipeline
