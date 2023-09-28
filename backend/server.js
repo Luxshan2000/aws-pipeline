@@ -3,7 +3,7 @@ const cors = require("cors")
 const bodyParser = require("body-parser")
 
 
-// const connectMongoDb = require("./config/database")
+const connectMongoDb = require("./config/database")
 // const addRoutes = require('./src/routes/addRoutes');
 // const getRoutes = require('./src/routes/getRoutes');
 

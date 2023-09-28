@@ -9,8 +9,9 @@ function App() {
       <p>By using Github actions and docker in AWS EC2 instance Ubuntu</p>
       <hr/>
       <hr/>
-      <SeeItems />
+      
       <AddItems />
+      <SeeItems />
     </div>
   );
 }
