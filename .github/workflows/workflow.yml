@@ -1,0 +1,57 @@
+name: CICD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Build and push frontend Docker image
+        run: |
+          cd frontend
+          docker build -t luxshan/frontend:latest .
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push luxshan/frontend:latest
+
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Build and push backend Docker image
+        run: |
+          cd backend
+          docker build -t luxshan/backend:latest .
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker push luxshan/backend:latest
+
+  deploy:
+    needs: [build-frontend, build-backend]
+    runs-on: self-hosted
+    steps:
+      - name: Pull frontend and backend images from Docker Hub
+        run: |
+          docker pull luxshan/frontend:latest
+          docker pull luxshan/backend:latest
+
+      - name: Stop and remove old containers
+        run: |
+          docker stop frontend-container || true
+          docker rm frontend-container || true
+          docker stop backend-container || true
+          docker rm backend-container || true
+
+      - name: Run frontend container
+        run: |
+          docker run -d -p 3000:3000 --name frontend-container luxshan/frontend:latest
+
+      - name: Run backend container
+        run: |
+          docker run -d -p 5000:5000 --name backend-container luxshan/backend:latest
