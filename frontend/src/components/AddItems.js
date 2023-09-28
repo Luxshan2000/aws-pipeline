@@ -5,13 +5,18 @@ function AddItems({setItems}) {
 
   const [name,setname] = useState('')
 
-  const handleSubmit = async  (ev)=>{
-    
-     ev.preventDefault()
-     await axios.post("http://51.20.93.112:5000/api/add/item",{name: name } )
-    
-     setname("")
+  const handleSubmit = async (ev) => {
+    ev.preventDefault();
+  
+    try {
+      await axios.post("http://51.20.93.112:5000/api/add/item", { name: name });
+      setname("");
+    } catch (error) {
+      // Handle errors, e.g., show an error message to the user
+      console.error("Error:", error);
+    }
   }
+  
 
   
 
