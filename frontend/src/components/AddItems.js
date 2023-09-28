@@ -9,7 +9,7 @@ function AddItems({setItems}) {
     ev.preventDefault();
   
     try {//51.20.93.112
-      const response = await axios.post("http://localhost:5000/api/add/item", { name: name });
+      const response = await axios.post("http://51.20.93.112:5000/api/add/item", { name: name });
       setname("");
       setItems((prv)=>[...prv,response.data.item])
     } catch (error) {
