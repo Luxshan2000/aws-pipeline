@@ -7,8 +7,8 @@ import { useEffect, useState } from 'react';
 function App() {
   const [items, setItems] = useState([])
 
-  useEffect(()=>{//51.20.93.112
-      axios.get("http://51.20.93.112:5000/api/get/items").then(response => {
+  useEffect(()=>{//51.20.76.107 
+      axios.get("http://51.20.76.107:5000/api/get/items").then(response => {
       
       setItems(response.data)
     })
