@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors({
   //51.20.76.107 
-  origin:["http://18.61.66.218:3000","http://18.61.66.218", "http://ec2-18-61-66-218.ap-south-2.compute.amazonaws.com","https://ec2-18-61-66-218.ap-south-2.compute.amazonaws.com"],//"exp://192.168.8.182:8081"
+  origin:["http://www.luxshanthavarasa.bio","http://18.61.66.218:3000","http://18.61.66.218", "http://ec2-18-61-66-218.ap-south-2.compute.amazonaws.com","https://ec2-18-61-66-218.ap-south-2.compute.amazonaws.com"],//"exp://192.168.8.182:8081"
   methods:["GET","POST"],
   credentials:true
 }))  
