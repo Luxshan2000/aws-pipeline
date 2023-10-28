@@ -9,7 +9,7 @@ function AddItems({setItems}) {
     ev.preventDefault();
   
     try {//51.20.76.107
-      const response = await axios.post("http://www.luxshanthavarasa.bio/api/add/item", { name: name });
+      const response = await axios.post("https://www.luxshanthavarasa.bio/api/add/item", { name: name });
       setname("");
       setItems((prv)=>[...prv,response.data.item])
     } catch (error) {
