@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(cors({
   //51.20.76.107 
-  origin:["https://www.luxshanthavarasa.bio","*"],//"exp://192.168.8.182:8081"
+  origin:["https://luxshanthavarasa.bio"],//"exp://192.168.8.182:8081"
   methods:["GET","POST"],
   credentials:true
 }))  
